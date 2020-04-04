@@ -1213,7 +1213,7 @@ if __name__ == "__main__":
                 # all x,y between
                 xs = np.linspace(x1, x2, num=num_between_line, endpoint=True)
                 ys = np.linspace(y1, y2, num=num_between_line, endpoint=True)
-                points = zip(xs, ys)
+                points = list(zip(xs, ys))
                 for x, y in points[:-1]:
                   x = int(x)
                   y = int(y)

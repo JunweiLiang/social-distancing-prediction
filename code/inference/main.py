@@ -12,6 +12,7 @@ import json
 import math
 import copy
 import operator
+# this is for removing warnings of Gdk-CRITICAL **
 import matplotlib
 matplotlib.use('Agg')
 # so here won"t have poll allocator info

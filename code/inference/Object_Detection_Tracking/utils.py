@@ -13,7 +13,7 @@ import cv2
 
 import tensorflow as tf
 from operator import mul
-from itertools import izip_longest
+#from itertools import izip_longest
 
 from collections import defaultdict
 import numpy as np
@@ -39,6 +39,7 @@ class Summary():
     with open(path, "w") as f:
       f.writelines("%s" % ("\n".join(self.lines)))
 
+"""
 def grouper(l, n, fillvalue=None):
   # given a list and n(batch_size), devide list into n sized chunks
   # last one will fill None
@@ -46,7 +47,7 @@ def grouper(l, n, fillvalue=None):
   out = izip_longest(*args, fillvalue=fillvalue)
   out = list(out)
   return out
-
+"""
 # simple FIFO class for moving average computation
 class FIFO_ME:
   def __init__(self, N):

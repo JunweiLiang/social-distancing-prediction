@@ -276,7 +276,7 @@ def get_coco_list(boxes, labels, probs, is_coco_class=False):
     box[2] -= box[0]
     box[3] -= box[1]  # produce x,y,w,h output
 
-    cat_id = label
+    cat_id = int(label)
     if is_coco_class:
       cat_name = coco_obj_id_to_class[cat_id]
     else:

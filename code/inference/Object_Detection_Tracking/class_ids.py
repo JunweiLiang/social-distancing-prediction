@@ -522,7 +522,7 @@ coco_obj_classes = [
     "toothbrush",
 ]
 coco_obj_class_to_id = {
-    coco_obj_classes[i]: i for i in xrange(len(coco_obj_classes))}
+    coco_obj_classes[i]: i for i in range(len(coco_obj_classes))}
 coco_obj_id_to_class = {
     coco_obj_class_to_id[o]: o for o in coco_obj_class_to_id}
 

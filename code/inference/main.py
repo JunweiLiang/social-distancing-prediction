@@ -99,6 +99,10 @@ parser.add_argument(
     default=os.path.join(top_dir, "models_and_data",
                          "scene36_64_id2name_top10.json"))
 
+parser.add_argument("--dist_thresh", default=150., type=float,
+                    help="Pixel distances to be considered within 6 feet."
+                         " Ideally we would need to know camera parameters.")
+
 # 3. intermediate output paths
 parser.add_argument("--inter_frame_path", default="video_frames",
                     help="Under output_path, folder name to"
@@ -1112,7 +1116,7 @@ if __name__ == "__main__":
 
             # check each person for social distancing violation
             # TODO(junweil) change to some scale based on person box height?
-            dist_thresh = 150  # in pixels, in 1920x1080 resolution
+            dist_thresh = args.dist_thresh  # in pixels, in 1920x1080 resolution
             violated_persons = {}
             # TODO(junweil): change these with matrix mul to be more efficient
             for person_id in pred_data:
@@ -1126,8 +1130,21 @@ if __name__ == "__main__":
                   dist = np.sum((pred_traj2 - pred_traj)**2, axis=-1)**(1./2)
                   dist = np.min(dist)
                   if dist <= dist_thresh:
-                    # center point between this guy and the other guy
+                    # center point between this guy and the other guy's future
+                    # location
                     center = (pred_traj[-1] + pred_traj2[-1])/2.0
+                    # center point between the current location
+                    center = (np.array(pred_data[person_id]["obs_traj"][-1]) + \
+                        np.array(pred_data[person_id2]["obs_traj"][-1]))/2.0
+                    if (person_id in track_id_to_boxes) and \
+                        (person_id2 in track_id_to_boxes):
+                      x1, y1, x2, y2 = track_id_to_boxes[person_id]
+                      person1_center = (int((x1+x2)/2.), int((y1+y2)/2.))
+                      x1, y1, x2, y2 = track_id_to_boxes[person_id2]
+                      person2_center = (int((x1+x2)/2.), int((y1+y2)/2.))
+                      center = (
+                          (person1_center[0] + person2_center[0])/2.,
+                          (person1_center[1] + person2_center[1])/2.)
                     violated_persons[person_id] = (person_id2, center)
                     break  # only one warning for now
 
@@ -1148,13 +1165,32 @@ if __name__ == "__main__":
               """
             shown_act_label = {}  # person_id who have already warned
             for person_id in violated_persons:
+
+              # plot person box
+              """
+              if person_id in track_id_to_boxes:
+                boxes = [track_id_to_boxes[person_id]]
+                colors = [(0, 0, 255)]
+                frame_data = draw_boxes(frame_data, boxes, labels=None,
+                                        colors=colors, font_scale=0.6,
+                                        font_thick=2, box_thick=4)
+              """
+              # plot a circle
+              if person_id in track_id_to_boxes:
+                x1, y1, x2, y2 = track_id_to_boxes[person_id]
+                person_center = (int((x1+x2)/2.), int((y1+y2)/2.))
+                cv2.circle(frame_data, person_center,
+                           radius=int(args.dist_thresh/2.0),
+                           color=(0, 0, 255), thickness=2)
+
               other_person_id, center = violated_persons[person_id]
               this_pred = pred_data[person_id]
               pred_traj = this_pred["pred_traj"]
+
               act_labels = "Warning: Keep 6 feet apart!"
               act_label_color = (0, 0, 255)  # blue, BGR
               # add background for the text
-              font_scale = 0.8
+              font_scale = 1.0
               font = cv2.FONT_HERSHEY_SIMPLEX
               font_thickness = 2
               ((linew, lineh), _) = cv2.getTextSize(
@@ -1164,28 +1200,39 @@ if __name__ == "__main__":
                   (other_person_id not in shown_act_label):
                 # show the text under the last pred location
                 x, y = center
-                more_h = 50  # more to below the point so we dont obstruct
+                # more to below the point so we dont obstruct
+                more_h = - args.dist_thresh
                 # COCO style text box
+                padding = 10.  # pad the text box
                 x1, y1, w, h = [
-                    (x - linew / 2.), y + lineh + more_h, linew, lineh]
+                    (x - linew/2.),
+                    y + lineh/2.0 + more_h,
+                    linew, lineh]
                 # top left + bottom right
                 textbox = np.array([x1, y1 - h, x1 + w, y1], dtype="float32")
-                cv2.rectangle(frame_data, (textbox[0], textbox[1]),
-                              (textbox[2], textbox[3]), color=(255, 255, 255),
+                textbox_pad = np.array([
+                    textbox[0] - padding,
+                    textbox[1] - padding,
+                    textbox[2] + padding,
+                    textbox[3] + padding], dtype="float32")
+                cv2.rectangle(frame_data,
+                              (textbox_pad[0], textbox_pad[1]),
+                              (textbox_pad[2], textbox_pad[3]),
+                              color=(255, 255, 255),
                               thickness=-1)
                 cv2.putText(frame_data, act_labels, (textbox[0], textbox[3]),
-                            font, font_scale, color=(255, 0, 0),
+                            font, font_scale, color=(0, 0, 255),
                             thickness=font_thickness)
+
+                # draw a circle around the possible meeting locations?
+                """
+                circle_center = (int(x), int(y))
+                cv2.circle(frame_data, circle_center,
+                           radius=int(args.dist_thresh/2.0),
+                           color=(0, 0, 255), thickness=2)
+                """
                 shown_act_label[person_id] = 1
                 shown_act_label[other_person_id] = 1
-
-              # plot person box again
-              if person_id in track_id_to_boxes:
-                boxes = [track_id_to_boxes[person_id]]
-                colors = [(0, 0, 255)]
-                frame_data = draw_boxes(frame_data, boxes, labels=None,
-                                        colors=colors, font_scale=0.6,
-                                        font_thick=2, box_thick=4)
 
               # 2.3 plot future trajectory as heatmap
               last_obs_xy = np.array(this_pred["obs_traj"][-1])  # [2]

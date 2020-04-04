@@ -12,6 +12,8 @@ import json
 import math
 import copy
 import operator
+import matplotlib
+matplotlib.use('Agg')
 # so here won"t have poll allocator info
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 import logging

@@ -856,8 +856,7 @@ def find_pred_data(vis_data, target_frame_idx, frame_gap):
   # [frames are 0, 12, 24, 36...]
   # so we will show the same thing from frame_idx to frame_idx + margin frame
   margin = frame_gap - 1
-  vis_frame_idxs = vis_data.keys()
-  vis_frame_idxs.sort()
+  vis_frame_idxs = sorted(vis_data.keys())
 
   found_frame_idx = None
   for frame_idx in vis_frame_idxs:

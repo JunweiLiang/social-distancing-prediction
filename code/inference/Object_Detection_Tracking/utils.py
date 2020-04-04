@@ -9,7 +9,7 @@ import sys
 import os
 import operator
 import cv2
-import commands
+#import commands
 
 import tensorflow as tf
 from operator import mul
@@ -70,6 +70,7 @@ class FIFO_ME:
 # return the gpu utilization at the moment. float between 0~1.0
 # tested for nvidia 384.90
 # gpuid_range is a tuple of (gpu_startid, gpu_num)
+"""
 def parse_nvidia_smi(gpuid_range):
   nvi_out = commands.getoutput("nvidia-smi")
   gpu_info_blocks = get_gpu_info_block(nvi_out)[
@@ -82,7 +83,7 @@ def parse_nvidia_smi(gpuid_range):
       info_block.strip().strip("|").split()[-2].strip("%")) / 100.0
                   for info_block in gpu_info_blocks]
   return temps, utilizations
-
+"""
 def get_gpu_info_block(nvi_out):
   nvi_out = nvi_out.split("\n")
   start_idx = -1

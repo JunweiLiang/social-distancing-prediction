@@ -15,14 +15,14 @@ Below we show an example of the system output. If potential risks are detected, 
 
 
 ## Dependencies
-+ Python 2/3; TensorFlow == 1.15.0; opencv; ffmpeg
++ Python 3; TensorFlow==1.15.2; cv2; tqdm; ffmpeg
 
 ## Usage
 ### Step 1: Download models and a test video
 Assuming you run the code at the top level of this repository. Model size is about 468MB and the test video is about 7MB.
 ```
 bash scripts/download_models.sh
-bash scripts/download_test_videos.sh
+bash scripts/download_test_video.sh
 ```
 
 ### Step 2: Run inferencing

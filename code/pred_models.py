@@ -10,6 +10,7 @@ import os
 import random
 import re
 import numpy as np
+import functools
 import tensorflow as tf
 
 
@@ -1046,7 +1047,7 @@ def flatten(tensor, keep):
   # each num in the [] will a*b*c*d...
   # so [0] -> just N here for left
   # for [N, M, JX, di] , left is N*M
-  left = reduce(operator.mul, [fixed_shape[i] or tf.shape(tensor)[i]
+  left = functools.reduce(operator.mul, [fixed_shape[i] or tf.shape(tensor)[i]
                                for i in range(start)])
   # [N, JQ,di]
   # [N*M, JX, di]

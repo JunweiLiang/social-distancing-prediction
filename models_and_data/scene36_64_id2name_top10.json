@@ -1,0 +1,26 @@
+{
+    "oldid2new": {
+        "33": 7, 
+        "2": 3, 
+        "1": 8, 
+        "5": 5, 
+        "7": 2, 
+        "10": 4, 
+        "12": 1, 
+        "14": 9, 
+        "21": 6, 
+        "94": 10
+    }, 
+    "id2name": {
+        "1": "sidewalk, pavement", 
+        "2": "road, route", 
+        "3": "building, edifice", 
+        "4": "grass", 
+        "5": "tree", 
+        "6": "car, auto, automobile, machine, motorcar", 
+        "7": "fence, fencing", 
+        "8": "wall", 
+        "9": "earth, ground", 
+        "10": "pole"
+    }
+}

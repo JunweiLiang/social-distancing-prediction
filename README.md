@@ -8,7 +8,7 @@ Below we show an example of the system output. If potential risks are detected, 
 
 <div align="center">
   <div style="">
-      <img src="images/VIRAT_S_000008.short.cut.gif" width="100%" />
+      <img src="images/VIRAT_S_000008.short.cut.gif" width="600px" />
   </div>
   <br/>
 </div>

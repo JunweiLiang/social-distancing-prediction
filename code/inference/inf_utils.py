@@ -793,7 +793,7 @@ def relative_to_abs(rel_traj, start_pos):
 
 def grouper(lst, num):
   args = [iter(lst)]*num
-  if (sys.version_info > (3, 0)):
+  if sys.version_info > (3, 0):
     out = itertools.zip_longest(*args, fillvalue=None)
   else:
     out = itertools.izip_longest(*args, fillvalue=None)

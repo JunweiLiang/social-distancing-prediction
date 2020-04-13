@@ -1,6 +1,6 @@
-# Social Distancing Violation Prediction
+# Social Distancing Early Forecasting System
 
-Out-of-the-box code base for social distancing violation prediction. Given a video, this code will give out a warning if the system predicts that people will violate social distancing (getting closer with each other than 6 feet) in the next 5 seconds. This early warnings could help stop people before they are actually at risk of getting infected. See this [blog](https://medium.com/@junweil/social-distancing-early-forecasting-system-60186baa67f5).
+Out-of-the-box code base for social distancing early forecasting. Given a video, this code will give out a warning if the system predicts that people will violate social distancing (getting closer with each other than 6 feet) in the next 5 seconds. This early warnings could help stop people before they are actually at risk of getting infected. See this [blog](https://medium.com/@junweil/social-distancing-early-forecasting-system-60186baa67f5).
 
 Keep social distancing (about 6 feet) and [save lives](https://www.cdc.gov/)!
 
@@ -40,7 +40,7 @@ ffmpeg -framerate 30.0 -i test_video/test_video_F_%08d.jpg test_video.mp4
 My limited tests show that on a RTX 2060 the processing time is 5x real-time, which means a one-minute 1920x1080 video will take 5 minute to process. And about 3 minutes of the processing is for visualization (writing tons of images to the disk). On a GTX 1080 TI it is 4x real-time.
 
 ## Acknowledgments
-This project is based on [Next-Prediction](https://github.com/google/next-prediction) and [CMU's Object Detection and Tracking](https://github.com/JunweiLiang/Object_Detection_Tracking).
+This project is based on [Next-Prediction](https://github.com/google/next-prediction), [Multiverse](https://github.com/JunweiLiang/Multiverse) and [CMU's Object Detection and Tracking](https://github.com/JunweiLiang/Object_Detection_Tracking).
 If you find this code useful then please cite:
 ```
 @inproceedings{liang2019peeking,

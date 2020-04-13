@@ -1,6 +1,6 @@
 # Social Distancing Violation Prediction
 
-Out-of-the-box code base for social distancing violation prediction. Given a video, this code will give out a warning if the system predicts that people will violate social distancing (getting closer with each other than 6 feet) in the next 5 seconds. This early warnings could help stop people before they are actually at risk of getting infected.
+Out-of-the-box code base for social distancing violation prediction. Given a video, this code will give out a warning if the system predicts that people will violate social distancing (getting closer with each other than 6 feet) in the next 5 seconds. This early warnings could help stop people before they are actually at risk of getting infected. See this [blog](https://medium.com/@junweil/social-distancing-early-forecasting-system-60186baa67f5).
 
 Keep social distancing (about 6 feet) and [save lives](https://www.cdc.gov/)!
 
@@ -49,6 +49,12 @@ If you find this code useful then please cite:
   booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
   pages={5725--5734},
   year={2019}
+}
+@inproceedings{liang2020garden,
+  title={The Garden of Forking Paths: Towards Multi-Future Trajectory Prediction},
+  author={Junwei Liang and Lu Jiang and Kevin Murphy and Ting Yu and Alexander Hauptmann},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2020}
 }
 ```
 

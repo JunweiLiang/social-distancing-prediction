@@ -15,7 +15,7 @@ Below we show an example of the system output. If potential risks are detected, 
 
 
 ## Dependencies
-+ Python 2/3; TensorFlow==1.15.2; cv2; tqdm; scipy; sklearn; matplotlib; ffmpeg
++ Python 2/3; TensorFlow-GPU==1.15.2; cv2; tqdm; scipy; sklearn; matplotlib; ffmpeg
 
 ## Usage
 ### Step 1: Download models and a test video

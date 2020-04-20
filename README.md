@@ -37,7 +37,10 @@ ffmpeg -framerate 30.0 -i test_video/test_video_F_%08d.jpg test_video.mp4
 ```
 
 ## Speed
-My limited tests show that on a RTX 2060 the processing time is 5x real-time, which means a one-minute 1920x1080 video will take 5 minute to process. And about 3 minutes of the processing is for visualization (writing tons of images to the disk). On a GTX 1080 TI it is 4x real-time.
+My limited tests show that on a RTX 2060 (6GB memory) the processing time is 2x real-time, which means a one-minute 1920x1080 video will take 2 minute to process.
+On a GTX 1080 TI it is about 1x real-time.
+Reducing input resolution will significantly decrease the processing time.
+The visualization is slow since it writes tons of images to the disk.
 
 ## Acknowledgments
 This project is based on [CMU's Object Detection and Tracking](https://github.com/JunweiLiang/Object_Detection_Tracking) and the following papers.

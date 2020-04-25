@@ -1,5 +1,8 @@
-tensorflow==1.15.2
 tqdm==4.45.0
 matplotlib==3.2.1
 numpy==1.18.3
 opencv-python==4.2.0.34
+tensorflow~=2.2.0rc3
+scipy~=1.4.1
+Pillow~=7.1.1
+six~=1.14.0

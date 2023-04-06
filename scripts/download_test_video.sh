@@ -4,7 +4,7 @@
 # about 7 MB
 
 mkdir -p test/
-wget https://next.cs.cmu.edu/data/VIRAT_S_000008.short.mp4 -O test/test_video.mp4
+wget https://precognition.team/next/data/VIRAT_S_000008.short.mp4 -O test/test_video.mp4
 
 # make a video list
 cd test/
